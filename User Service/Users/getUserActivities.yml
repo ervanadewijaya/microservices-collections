@@ -1,0 +1,41 @@
+info:
+  name: GET User Activities
+  type: http
+  seq: 6
+
+http:
+  method: GET
+  url: "{{base_url_user}}/api/users/activities"
+  auth: inherit
+
+docs: |-
+  ## GET User Activities
+
+  Returns the user activity log consumed from `user-activity-topic` Kafka topic.
+
+  **Kafka Actions:** `CREATE_USER`, `UPDATE_USER`, `DELETE_USER`
+
+  **Expected Response 200:**
+  ```json
+  {
+    "status": 200,
+    "message": "Success",
+    "data": [
+      {
+        "id": 1,
+        "transactionNumber": "TRX-ABC123DEF456",
+        "userId": 1,
+        "productId": null,
+        "action": "CREATE_USER",
+        "description": "User created: Budi Santoso",
+        "createdAt": "2026-05-30T08:00:00"
+      }
+    ]
+  }
+  ```
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

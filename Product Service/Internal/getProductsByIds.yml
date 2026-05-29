@@ -1,0 +1,46 @@
+info:
+  name: POST Get Products by IDs
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url_product}}/internal/products/by-ids"
+  body:
+    type: json
+    data: |-
+      [1, 2, 3]
+  auth: inherit
+
+headers:
+  - name: Content-Type
+    value: application/json
+    enabled: true
+
+docs: |-
+  ## POST Get Products by IDs
+
+  Internal endpoint called by user-service to enrich user responses with product details.
+
+  **Request Body:** Array of product IDs.
+
+  **Expected Response 200** (raw array, no wrapper):
+  ```json
+  [
+    {
+      "id": 1,
+      "productCode": "PRD001",
+      "productName": "Laptop Gaming",
+      "description": "High-performance gaming laptop with RTX 4060",
+      "price": 15000000.0,
+      "createdAt": "2026-05-30T08:00:00",
+      "updatedAt": "2026-05-30T08:00:00"
+    }
+  ]
+  ```
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

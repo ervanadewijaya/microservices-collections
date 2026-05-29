@@ -1,0 +1,52 @@
+info:
+  name: PUT Update Product
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: "{{base_url_product}}/api/products/1"
+  body:
+    type: json
+    data: |-
+      {
+        "productName": "Laptop Gaming Pro",
+        "description": "Updated high-performance gaming laptop",
+        "price": 18000000.0
+      }
+  auth: inherit
+
+headers:
+  - name: Content-Type
+    value: application/json
+    enabled: true
+
+docs: |-
+  ## PUT Update Product
+
+  Updates an existing product by ID. Publishes `UPDATE_PRODUCT` event to `product-activity-topic`.
+
+  **Path Param:** `id = 1`
+
+  **Expected Response 200:**
+  ```json
+  {
+    "status": 200,
+    "message": "Product updated successfully",
+    "data": {
+      "id": 1,
+      "productCode": "PRD001",
+      "productName": "Laptop Gaming Pro",
+      "description": "Updated high-performance gaming laptop",
+      "price": 18000000.0,
+      "createdAt": "2026-05-30T08:00:00",
+      "updatedAt": "2026-05-30T09:00:00"
+    }
+  }
+  ```
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

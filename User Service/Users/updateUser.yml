@@ -1,0 +1,58 @@
+info:
+  name: PUT Update User
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: "{{base_url_user}}/api/users/3173170000000001"
+  body:
+    type: json
+    data: |-
+      {
+        "fullName": "Budi Santoso Updated",
+        "email": "budi.new@mail.com",
+        "phoneNumber": "+6281234567890",
+        "age": 31,
+        "address": "Jl. Sudirman No. 99, Jakarta",
+        "productIds": [1, 3]
+      }
+  auth: inherit
+
+headers:
+  - name: Content-Type
+    value: application/json
+    enabled: true
+
+docs: |-
+  ## PUT Update User
+
+  Updates an existing user by KTP number. Publishes `UPDATE_USER` event to `user-activity-topic`.
+
+  **Path Param:** `ktpNumber = 3173170000000001`
+
+  **Expected Response 200:**
+  ```json
+  {
+    "status": 200,
+    "message": "User updated successfully",
+    "data": {
+      "ktpNumber": "3173170000000001",
+      "fullName": "Budi Santoso Updated",
+      "email": "budi.new@mail.com",
+      "phoneNumber": "+6281234567890",
+      "age": 31,
+      "address": "Jl. Sudirman No. 99, Jakarta",
+      "products": [
+        { "productId": 1, "productName": "Laptop Gaming" },
+        { "productId": 3, "productName": "Wireless Headphones" }
+      ]
+    }
+  }
+  ```
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

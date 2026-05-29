@@ -1,0 +1,10 @@
+name: Local
+variables:
+  - name: base_url_user
+    value: http://localhost:8081
+    enabled: true
+    secret: false
+  - name: base_url_product
+    value: http://localhost:8082
+    enabled: true
+    secret: false

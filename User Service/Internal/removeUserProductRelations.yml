@@ -1,0 +1,25 @@
+info:
+  name: DELETE Remove User-Product Relations
+  type: http
+  seq: 1
+
+http:
+  method: DELETE
+  url: "{{base_url_user}}/internal/users/product/1"
+  auth: inherit
+
+docs: |-
+  ## DELETE Remove User-Product Relations
+
+  Internal endpoint called by product-service when a product is deleted.
+  Removes all user-product associations for the given product ID.
+
+  **Path Param:** `productId = 1`
+
+  **Expected Response 200:** Empty body (no content).
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

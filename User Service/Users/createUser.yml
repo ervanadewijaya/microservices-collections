@@ -1,0 +1,79 @@
+info:
+  name: POST Create User
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url_user}}/api/users"
+  body:
+    type: json
+    data: |-
+      {
+        "ktpNumber": "3173170000000099",
+        "fullName": "Dewi Lestari",
+        "email": "dewi@mail.com",
+        "phoneNumber": "081298765432",
+        "age": 28,
+        "address": "Jl. Kebon Jeruk No. 7, Jakarta",
+        "productIds": [1, 2]
+      }
+  auth: inherit
+
+headers:
+  - name: Content-Type
+    value: application/json
+    enabled: true
+
+docs: |-
+  ## POST Create User
+
+  Creates a new user. Publishes `CREATE_USER` event to `user-activity-topic` (key = ktpNumber).
+
+  **Expected Response 201:**
+  ```json
+  {
+    "status": 201,
+    "message": "User created successfully",
+    "data": {
+      "ktpNumber": "3173170000000099",
+      "fullName": "Dewi Lestari",
+      "email": "dewi@mail.com",
+      "phoneNumber": "081298765432",
+      "age": 28,
+      "address": "Jl. Kebon Jeruk No. 7, Jakarta",
+      "products": [
+        { "productId": 1, "productName": "Laptop Gaming" },
+        { "productId": 2, "productName": "Smartphone Android" }
+      ]
+    }
+  }
+  ```
+
+  **Invalid Body (to test 400):**
+  ```json
+  {
+    "ktpNumber": "123",
+    "fullName": "Dewi123",
+    "email": "not-an-email",
+    "phoneNumber": "0812-9876-5432",
+    "age": 10,
+    "address": "",
+    "productIds": []
+  }
+  ```
+
+  **Validation Rules:**
+  - `ktpNumber`: exactly 16 digits (numeric only)
+  - `fullName`: letters and spaces only, no numbers, max 255 chars
+  - `email`: valid email format
+  - `phoneNumber`: starts with +62 or 08, no dashes/spaces, max 13 digits
+  - `age`: integer, min 17, max 100
+  - `address`: required, max 255 chars
+  - `productIds`: non-empty list, at least 1 valid product ID
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

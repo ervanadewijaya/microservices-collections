@@ -1,0 +1,41 @@
+info:
+  name: GET All Users
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{base_url_user}}/api/users"
+  auth: inherit
+
+docs: |-
+  ## GET All Users
+
+  Returns a list of all users with their associated products (summary).
+
+  **Expected Response 200:**
+  ```json
+  {
+    "status": 200,
+    "message": "Success",
+    "data": [
+      {
+        "ktpNumber": "3173170000000001",
+        "fullName": "Budi Santoso",
+        "email": "budi@mail.com",
+        "phoneNumber": "081234567890",
+        "age": 30,
+        "address": "Jl. Sudirman No. 1, Jakarta",
+        "products": [
+          { "productId": 1, "productName": "Laptop Gaming" }
+        ]
+      }
+    ]
+  }
+  ```
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

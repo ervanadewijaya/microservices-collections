@@ -1,0 +1,47 @@
+info:
+  name: GET Product by ID
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{base_url_product}}/api/products/1"
+  auth: inherit
+
+docs: |-
+  ## GET Product by ID
+
+  Returns a single product by its ID.
+
+  **Path Param:** `id = 1`
+
+  **Expected Response 200:**
+  ```json
+  {
+    "status": 200,
+    "message": "Success",
+    "data": {
+      "id": 1,
+      "productCode": "PRD001",
+      "productName": "Laptop Gaming",
+      "description": "High-performance gaming laptop with RTX 4060",
+      "price": 15000000.0,
+      "createdAt": "2026-05-30T08:00:00",
+      "updatedAt": "2026-05-30T08:00:00"
+    }
+  }
+  ```
+
+  **Not Found Response 404:**
+  ```json
+  {
+    "status": 404,
+    "message": "Product not found: 99"
+  }
+  ```
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

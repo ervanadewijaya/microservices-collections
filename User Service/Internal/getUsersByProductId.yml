@@ -1,0 +1,35 @@
+info:
+  name: GET Get Users by Product ID
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{base_url_user}}/internal/users/product/1"
+  auth: inherit
+
+docs: |-
+  ## GET Get Users by Product ID
+
+  Internal endpoint called by product-service for `GET /api/products/{id}/users`.
+  Returns all users associated with the given product ID.
+
+  **Path Param:** `productId = 1`
+
+  **Expected Response 200** (raw array, no wrapper):
+  ```json
+  [
+    {
+      "id": 1,
+      "ktpNumber": "3173170000000001",
+      "fullName": "Budi Santoso",
+      "email": "budi@mail.com"
+    }
+  ]
+  ```
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,30 @@
+info:
+  name: DELETE Delete User
+  type: http
+  seq: 5
+
+http:
+  method: DELETE
+  url: "{{base_url_user}}/api/users/3173170000000001"
+  auth: inherit
+
+docs: |-
+  ## DELETE Delete User
+
+  Deletes a user by KTP number. Publishes `DELETE_USER` event to `user-activity-topic`.
+
+  **Path Param:** `ktpNumber = 3173170000000001`
+
+  **Expected Response 200:**
+  ```json
+  {
+    "status": 200,
+    "message": "User deleted successfully"
+  }
+  ```
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

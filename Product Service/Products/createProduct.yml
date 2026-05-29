@@ -1,0 +1,66 @@
+info:
+  name: POST Create Product
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url_product}}/api/products"
+  body:
+    type: json
+    data: |-
+      {
+        "productCode": "PRD006",
+        "productName": "Gaming Mouse",
+        "description": "RGB gaming mouse 16000 DPI",
+        "price": 750000.0
+      }
+  auth: inherit
+
+headers:
+  - name: Content-Type
+    value: application/json
+    enabled: true
+
+docs: |-
+  ## POST Create Product
+
+  Creates a new product. Publishes `CREATE_PRODUCT` event to `product-activity-topic`.
+
+  **Expected Response 201:**
+  ```json
+  {
+    "status": 201,
+    "message": "Product created successfully",
+    "data": {
+      "id": 6,
+      "productCode": "PRD006",
+      "productName": "Gaming Mouse",
+      "description": "RGB gaming mouse 16000 DPI",
+      "price": 750000.0,
+      "createdAt": "2026-05-30T08:00:00",
+      "updatedAt": "2026-05-30T08:00:00"
+    }
+  }
+  ```
+
+  **Validation Error Body (to test 400):**
+  ```json
+  {
+    "productCode": "",
+    "productName": "",
+    "description": "",
+    "price": -1
+  }
+  ```
+
+  **Validation Rules:**
+  - `productCode`: required, max 50 chars, must be unique
+  - `productName`: required, max 255 chars
+  - `price`: required, must be > 0
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
