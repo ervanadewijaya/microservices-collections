@@ -1,0 +1,31 @@
+info:
+  name: Sync Product Name
+  type: http
+  seq: 3
+
+http:
+  method: PUT
+  url: "{{base_url_user}}/internal/users/product/{{productId}}/name"
+  auth: inherit
+  body: none
+  query:
+    productName: Nama Produk Baru
+
+docs: |-
+  ## PUT Sync Product Name
+  
+  Internal endpoint ini digunakan oleh product-service untuk memberi tahu user-service agar mengupdate kolom product_name di tabel relasi user_product ketika terjadi perubahan nama produk.
+
+  **Path Param:** 
+  - `productId`: ID produk yang akan disinkronisasi
+
+  **Query Parameter:**
+  - `productName`: Nama produk baru yang akan diupdate secara massal
+
+  **Expected Response 200:** Empty body (no content).
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
